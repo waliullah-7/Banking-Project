@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <h3>Welcome {{name}}</h3>
+</head>
+    <form action="" method="post" novalidate>
+        {% for fm in form %}
+        {{fm.label_tag}} {{fm}} {{fm.errors | striptags}} <br><br>
+        {% endfor %}
+        {% for pf in password_form %}
+        {{pf.label_tag}} {{pf}} {{pf.errors | striptags}} <br><br>
+        {% endfor %}
+        {% comment %} {{password_form}}  {% endcomment %}
+        <input type="submit" value="Submit">
+    <body>
+</form>
+<br><br>
+
+</body>
+</html>

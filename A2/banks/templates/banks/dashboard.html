@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Dashboard!</title>
+    <h1>Welcome to Dashboard.</h1>
+    <style>
+        table{
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <a href="{% url 'profileview' %}">Profile View</a><br>
+    <a href="{% url 'logout' %}">logout</a><br>
+    <a href="{% url 'profile' %}">Profile Edit</a><br>
+    <a href="{% url 'login' %}">Back</a><br>
+
+    <h1>Bank Table</h1>
+    <table class="table table-hover">
+        <thead>
+            <style>
+                td, th, tr{
+                    border: 2px solid black;
+                }
+            </style>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Bank Name: </th>
+                <th scope="col"> Swift Code: </th>
+                <th scope="col">Institution Number: </th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bkv in bk %}
+            <tr>
+                <th scope="row">{{bkv.id}}</th>
+                <td>{{bkv.bankname}}</td>
+                <td>{{bkv.swift_code}}</td>
+                <td>{{bkv.inst_num}}</td>
+                <td>
+                    <a href="{% url 'bankupdate' bkv.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                    <form action="{% url 'bankdelete' bkv.id %}" method="post" class="d-inline">                        {% csrf_token %}
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table><br><br><br>
+{% comment %} ..................................................................... {% endcomment %}
+
+<h1>Branch Table</h1>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Id: </th>
+                    <th scope="col">Bank: </th>
+                    <th scope="col">Branch Name: </th>
+                    <th scope="col">Transit Number: </th>
+                    <th scope="col">Adress: </th>
+                    <th scope="col">Email: </th>
+                    <th scope="col">Caacity: </th>      
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for brv in br %}
+                <tr>
+                    <th scope="row">{{brv.id}}</th>
+                    <td>{{brv.bank}}</td>
+                    <td>{{brv.name}}</td>
+                    <td>{{brv.transit_num}}</td>
+                    <td>{{brv.address}}</td>
+                    <td>{{brv.email}}</td>
+                    <td>{{brv.capacity}}</td>
+                    <td>
+                        <a href="{% url 'branchupdate' brv.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{% url 'branchdelete' brv.id %}" method="post" class="d-inline">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+
+
+</body>
+</html>
